@@ -13,10 +13,7 @@ def decrypt(token: bytes, key: bytes) -> bytes:
 #Checks if .cmsc files exists
 def check_profiles():
     check = glob.glob(r"*.cmsc")
-    if check == []:
-        return "No profiles found!"
-    else:
-        return check
+    return check
 
 #Converts lists into a comma separated string
 def list_to_string(input_list):
@@ -28,9 +25,9 @@ def list_to_string(input_list):
     return end
 
 #Converts strings into lists
-def string_to_list(input_list):
+def string_to_list(input_string):
     temp = []
-    split_list = input_list.split('\n')
+    split_list = input_string.split('\n')
     for x in split_list:
         temp.append(x.split(','))
     return temp
@@ -63,14 +60,15 @@ def export_to_csv(input_list,profile_name):
 #Encode lists before writing to cmsc files
 def encode_profile(list1,profile_name):
     global key
-    file = open(profile_name+'.cmsc','w')
+    file = open(profile_name+'.cmsc','wb')
     string = list_to_string(list1)
-    file.write(encrypt(string.encode(), key.encode()).decode())
+    file.write(encrypt(string.encode(), key.encode()))
     file.close()
 
 #Decode profiles into lists
 def decode_profile(file_name):
     global key
-    file = open(file_name+'.cmsc','r')
-    string = decrypt(file.read().encode(), key.encode()).decode()
-    return list_to_string(string)
+    file = open(file_name+'.cmsc','rb')
+    string = decrypt(file.read(), key.encode()).decode()
+    file.close()
+    return string_to_list(string)
