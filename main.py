@@ -1,7 +1,15 @@
 #Print to allow user to know that program is running as importing some modules take time.
 print('Application initializing. Please wait. This may take a few seconds...')
-import file_mgmt, data_process
+import subprocess
 import sys, os, time
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+print('Installing necessary libraries...')
+install(termplotlib)
+install(cryptography)
+import file_mgmt, data_process
 import termplotlib as tpl
 from datetime import date
 
