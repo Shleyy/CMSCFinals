@@ -48,7 +48,7 @@ def export_to_csv(input_list,profile_name):
     profile_name += '.csv'
     file = open(profile_name,'w')
     temp = ""
-    end = "Category,Value,Date\n"
+    end = "Category,Value,Date,Description\n"
     for list1 in input_list:
         list2 = [str(element) for element in list1]
         end += ",".join(list2)
