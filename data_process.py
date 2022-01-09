@@ -15,6 +15,7 @@ def sort_in_sort(data_list, category,sorting_method):
         temp.sort(key = lambda x: x[1], reverse = True)
     else:
         temp.sort(key = lambda x: x[1])
+    #Appends budget to top of the list.
     temp[:0] = budget
     return temp
 
@@ -51,7 +52,8 @@ def csv_validation(data_list):
         valid = False
     
     return valid
-    
+
+#Separate values from data list into separate lists for easier manipulation    
 def separate_values(data_list):
     Categories = []
     Value = []
@@ -63,6 +65,7 @@ def separate_values(data_list):
     [Description.append(x[3]) for x in data_list]
     return Categories,Value,Date,Description
 
+#Call before an update to ensure expense is always equal to sum of other categories
 def recalculate_expenses(data_list):
     temp = 0
     for x in data_list:
